@@ -1,0 +1,27 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+.calculator {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 5px; /* You can adjust the gap value as per your preference */
+}
+
+.button span {
+    margin: 10px;
+    position: relative;
+    display: flex;
+    padding: 10px;
+    background-color: #e0e0e0;
+    border: 1px solid #ccc;
+    text-align: center;
+}

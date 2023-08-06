@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+       
+        .calculator{
+            width: 340px;
+            display: grid;
+            background-color: #ffffff;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .calculator .button {
+            /* width: 340px;
+            display: grid;
+            position: relative;
+            gap: 10px;
+            background-color: #ffffff;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+            position: relative;
+            display: grid;
+        }
+
+        .button {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 60px;
+            padding: 10px;
+            font-size: 24px;
+            background-color: #e0e0e0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #d4d4d4;
+        }
+        .calculator #input{
+            grid-column: span 4;
+            border: 2px solid #ccc;
+            line-height: 100px;
+            height: 100px;
+            text-align: end;
+        }
+
+        .calculator #clear{
+            background-color: yellow;
+            grid-column: span 2;
+        }
+        .calculator #equal{
+           
+            background-color: greenyellow;
+        }
+        .calculator #c{
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <h2 id="input"></h2>
+        <div id="clear" class="button">clear</div>
+        <div class="button">+</div>
+        <div class="button">-</div>
+        <div class="button">7</div>
+        <div class="button">8</div>
+        <div class="button">9</div>
+        <div class="button">/</div>
+        <div class="button">4</div>
+        <div class="button">5</div>
+        <div class="button">6</div>
+        <div class="button">*</div>
+        <div class="button">1</div>
+        <div class="button">2</div>
+        <div class="button">3</div>
+        <div id="equal"class="button">=</div>
+        <div class="button">0</div>
+        <div class="button">.</div>
+        
+        <div class="button">^</div>
+        <div id="c"class="button">C</div>
+    </div>
+    <script>
+        // Get reference to the calculator container
+        const calculator = document.querySelector('.calculator');
+
+        // Get reference to the input display element
+        const inputDisplay = document.getElementById('input');
+
+        // Variable to store the current input expression
+        let currentInput = '';
+
+        // Function to update the display with the current input expression
+        function updateDisplay() {
+            inputDisplay.textContent = currentInput;
+        }
+
+        // Function to handle button clicks
+        function handleButtonClick(event) {
+            const buttonValue = event.target.textContent;
+
+            if (buttonValue === '=') {
+                // If the user clicks on '=', evaluate the expression and show the result
+                try {
+                    currentInput = eval(currentInput);
+                    currentInput = parseFloat(currentInput.toFixed(8)); 
+                } catch (error) {
+                    currentInput = 'Error';
+                }
+            } else if (buttonValue === 'clear') {
+                // If the user clicks on 'C', clear the input expression and reset the result to 0
+                currentInput = '';
+            } else if (buttonValue === '^') {
+                // If the user clicks on '^', append the exponentiation symbol to the current input expression
+                currentInput += '**';
+            } 
+            else if (buttonValue === 'C') {
+                // If the user clicks on the backspace button, remove the last character from the input
+                currentInput = currentInput.slice(0, -1);}
+            else {
+                // For other buttons, append the value to the current input expression
+                currentInput += buttonValue;
+            }
+
+            // Update the display with the current input expression
+            updateDisplay();
+        }
+
+        // Add click event listeners to all buttons inside the calculator
+        const buttons = calculator.querySelectorAll('.button');
+        buttons.forEach(button => {
+            button.addEventListener('click', handleButtonClick);
+        });
+    </script>
+</body>
+
+</html>
